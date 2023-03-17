@@ -90,15 +90,12 @@ class EventForm:
                 }]
 
         file_exists = os.path.exists("eventos.csv")
-        if not file_exists:
-            messagebox.showinfo("Error", "No existe el archivo")
-        else:
-            with open("eventos.csv", "a", newline="") as csvfile:
-                campos = ["ID", "Titulo", "Fecha", "Hora", "Descripcion", "Importancia"]
-                writer = csv.DictWriter(csvfile, fieldnames=campos)
-                writer.writeheader()
-                for data in datos:
-                    writer.writerow(data)
+        with open("eventos.csv", "a", newline="") as csvfile:
+            campos = ["ID", "Titulo", "Fecha", "Hora", "Descripcion", "Importancia"]
+            writer = csv.DictWriter(csvfile, fieldnames=campos)
+            writer.writeheader()
+            for data in datos:
+                writer.writerow(data)
 
 # ! ESTO TRAE TODO LA LISTA TOTAL DE LOS EVENTO NO IMPORT LOS DIA NI LAS FECHAS
     def cargar(self):
