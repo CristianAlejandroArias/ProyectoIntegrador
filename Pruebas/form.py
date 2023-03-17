@@ -47,7 +47,7 @@ class EventForm:
         # tk.Button(root, text="Crear evento", command=self.crear_evento).grid(row=5, column=0)
         tk.Button(root, text="Modificar evento", command=self.buscar_evento).grid(row=5, column=1)
         tk.Button(root, text="Eliminar evento", command=self.eliminar_evento).grid(row=5, column=2)
-        tk.Button(root, text="Guardar", command=self.guardar).grid(row=6, column=0)
+        tk.Button(root, text="Guardar", command=self.guardar2).grid(row=6, column=0)
         tk.Button(root, text="Cargar", command=self.cargar).grid(row=6, column=1)
 
 
@@ -89,13 +89,38 @@ class EventForm:
                 "Importancia": self.importancia_var.get()
                 }]
 
-        file_exists = os.path.exists("eventos.csv")
+        file_exists = os.path.exists("eventos.csv")#verifica si el archivo existe.
         with open("eventos.csv", "a", newline="") as csvfile:
             campos = ["ID", "Titulo", "Fecha", "Hora", "Descripcion", "Importancia"]
             writer = csv.DictWriter(csvfile, fieldnames=campos)
             writer.writeheader()
             for data in datos:
                 writer.writerow(data)
+
+    
+    def guardar2(self):#Cristian
+        id_v = self.id_evento = self.identificador()
+        import os
+        import csv
+
+        dicc_evento = {#manda al diccionario directamente
+                    "ID": id_v, 
+                    "Titulo": self.titulo_var.get(), 
+                    "Fecha": self.fecha_var.get(),
+                    "Hora": self.hora_var.get(),
+                    "Descripcion": self.descripcion_var.get(), 
+                    "Importancia": self.importancia_var.get()
+                }
+
+        file_exists = os.path.exists("eventos.csv")
+        # 'a' (append) abierto para escritura, añadiendo al final del archivo si éste existe, si no existe lo crea. 
+        with open("eventos.csv", "a", newline="") as csvfile:
+            campos = ["ID", "Titulo", "Fecha", "Hora", "Descripcion", "Importancia"]
+            writer = csv.DictWriter(csvfile, fieldnames=campos)
+            if not file_exists:
+                writer.writeheader()
+            writer.writerow(dicc_evento)
+
 
 # ! ESTO TRAE TODO LA LISTA TOTAL DE LOS EVENTO NO IMPORT LOS DIA NI LAS FECHAS
     def cargar(self):
