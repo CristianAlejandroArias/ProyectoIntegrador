@@ -100,7 +100,6 @@ class Calendario(tk.Frame, Evento):
 
 
 if __name__ == "__main__":
-    p = ThemedTk(theme="blue") # no funciona :(
     calendario = Calendario(p)
     calendario.mainloop()
 
