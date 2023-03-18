@@ -100,7 +100,7 @@ class Calendario(tk.Frame, Evento):
 
 
 if __name__ == "__main__":
-    calendario = Calendario(p)
+    calendario = Calendario()
     calendario.mainloop()
 
 
